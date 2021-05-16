@@ -1,0 +1,1 @@
+INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA DOS BOBOS","comd","JAVA","Carlos Mendes","11997516492")
