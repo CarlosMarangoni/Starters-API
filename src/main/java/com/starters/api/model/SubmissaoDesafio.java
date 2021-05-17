@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class SubmissaoDesafio {
@@ -13,11 +15,14 @@ public class SubmissaoDesafio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "starter_codigo")
 	private Starter starter;
 	
-	@OneToOne
+	@ManyToOne
+	@JoinColumn(name = "desafio_codigo")
 	private Desafio desafio;
+	
 	
 	private String endRepositorio;
 

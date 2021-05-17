@@ -17,50 +17,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.starters.api.model.Starter;
-import com.starters.api.repository.StarterRepository;
+import com.starters.api.model.Desafio;
+import com.starters.api.repository.DesafioRepository;
 
 @RestController
-@RequestMapping("/starters")
-public class StarterResource {
+@RequestMapping("/desafios")
+public class DesafioResource {
 
 	@Autowired
-	private StarterRepository starterRepository;
+	private DesafioRepository desafioRepository;
 
 	@GetMapping
-	public List<Starter> listar() {
-		return starterRepository.findAll();
+	public List<Desafio> listar() {
+		return desafioRepository.findAll();
 	}
 
 	@PostMapping
-	public ResponseEntity<Starter> adicionar(@RequestBody Starter starter){
+	public ResponseEntity<Desafio> adicionar(@RequestBody Desafio desafio){
 		
-		starterRepository.save(starter);
-		return ResponseEntity.status(HttpStatus.CREATED).body(starter);
+		desafioRepository.save(desafio);
+		return ResponseEntity.status(HttpStatus.CREATED).body(desafio);
 		
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		starterRepository.deleteById(codigo);
+		desafioRepository.deleteById(codigo);
 	}
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<?> buscar(@PathVariable Long codigo) {
-		Optional<Starter> starter = starterRepository.findById(codigo);
-		if(starter.isEmpty()) {
+		Optional<Desafio> desafio = desafioRepository.findById(codigo);
+		if(desafio.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok().body(starter.get());
+		return ResponseEntity.ok().body(desafio.get());
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<?> editar (@RequestBody Starter starter,@PathVariable Long codigo){
-		Optional<Starter> starterBuscado = starterRepository.findById(codigo);
-		BeanUtils.copyProperties(starter, starterBuscado.get(),"codigo");
-		starterRepository.save(starterBuscado.get());
-		return ResponseEntity.ok(starterBuscado.get());
+	public ResponseEntity<?> editar (@RequestBody Desafio desafio,@PathVariable Long codigo){
+		Optional<Desafio> desafioBuscado = desafioRepository.findById(codigo);
+		BeanUtils.copyProperties(desafio, desafioBuscado.get(),"codigo");
+		desafioRepository.save(desafioBuscado.get());
+		return ResponseEntity.ok(desafioBuscado.get());
 	}
 
 }

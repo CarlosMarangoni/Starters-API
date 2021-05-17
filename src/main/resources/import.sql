@@ -1,1 +1,10 @@
-INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA DOS BOBOS","comd","JAVA","Carlos Mendes","11997516492")
+INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA DOS BOBOS","comd","JAVA","Carlos Mendes","11997516492");
+INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA DAS FLORES","dmer","JAVA","Darlan Ricardo","11997515666");
+INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA QUATRO","mamg","CSHARP","Marilza Marangoni","119973622798");
+INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA MONTEIRO LOBATO","joca","CSHARP","João Carlos","119954738756");
+INSERT INTO desafio (descricao) VALUES ("CRUD Imobiliaria");
+INSERT INTO desafio (descricao) VALUES ("CRUD Shows");
+INSERT INTO desafio (descricao) VALUES ("CRUD Livros");
+INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/comd/imobiliaria",1,1);
+INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/dmer/imobiliaria",1,2);
+INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/mamg/shows",2,3);
