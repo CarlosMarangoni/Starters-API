@@ -7,8 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"starter_codigo","desafio_codigo"})})
 public class SubmissaoDesafio {
 
 	@Id
