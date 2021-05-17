@@ -1,10 +1,14 @@
 package com.starters.api.resource;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +37,7 @@ public class StarterResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Starter> adicionar(@RequestBody Starter starter){
+	public ResponseEntity<Starter> adicionar(@Valid @RequestBody Starter starter){
 		
 		starterRepository.save(starter);
 		return ResponseEntity.status(HttpStatus.CREATED).body(starter);
@@ -58,6 +62,9 @@ public class StarterResource {
 	@PutMapping("/{codigo}")
 	public ResponseEntity<?> editar (@RequestBody Starter starter,@PathVariable Long codigo){
 		Optional<Starter> starterBuscado = starterRepository.findById(codigo);
+		if(starterBuscado.isEmpty()) {
+			throw new NoSuchElementException("No resource found with id " + codigo);
+		}
 		BeanUtils.copyProperties(starter, starterBuscado.get(),"codigo");
 		starterRepository.save(starterBuscado.get());
 		return ResponseEntity.ok(starterBuscado.get());

@@ -1,10 +1,14 @@
 package com.starters.api.resource;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +37,7 @@ public class NotaDesafioResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<NotaDesafio> adicionar(@RequestBody NotaDesafio notaDesafio){
+	public ResponseEntity<NotaDesafio> adicionar(@Valid @RequestBody NotaDesafio notaDesafio){
 		
 		notaDesafioRepository.save(notaDesafio);
 		return ResponseEntity.status(HttpStatus.CREATED).body(notaDesafio);
@@ -58,6 +62,9 @@ public class NotaDesafioResource {
 	@PutMapping("/{codigo}")
 	public ResponseEntity<?> editar (@RequestBody NotaDesafio notaDesafio,@PathVariable Long codigo){
 		Optional<NotaDesafio> notaDesafioBuscado = notaDesafioRepository.findById(codigo);
+		if(notaDesafioBuscado.isEmpty()) {
+			throw new NoSuchElementException("No resource found with id " + codigo);
+		}
 		BeanUtils.copyProperties(notaDesafio, notaDesafioBuscado.get(),"codigo");
 		notaDesafioRepository.save(notaDesafioBuscado.get());
 		return ResponseEntity.ok(notaDesafioBuscado.get());

@@ -6,6 +6,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Starter {
@@ -14,12 +16,18 @@ public class Starter {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	@NotNull
+	@Size(max = 100)
 	private String nome;
 	
+	@NotNull
+	@Size(min = 4,max = 4)
 	private String letras;
 	
+	@NotNull
 	private String telefone;
 	
+	@NotNull
 	private String endereco;
 	
 	@Enumerated(EnumType.STRING)

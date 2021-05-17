@@ -6,9 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"starter_codigo","desafio_codigo"})})
@@ -20,13 +20,15 @@ public class SubmissaoDesafio {
 	
 	@ManyToOne
 	@JoinColumn(name = "starter_codigo")
+	@NotNull
 	private Starter starter;
 	
 	@ManyToOne
 	@JoinColumn(name = "desafio_codigo")
+	@NotNull
 	private Desafio desafio;
 	
-	
+	@NotNull
 	private String endRepositorio;
 
 	public Long getCodigo() {

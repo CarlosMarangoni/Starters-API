@@ -1,10 +1,14 @@
 package com.starters.api.resource;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +37,7 @@ public class SubmissaoDesafioResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<SubmissaoDesafio> adicionar(@RequestBody SubmissaoDesafio submissaoDesafio){
+	public ResponseEntity<SubmissaoDesafio> adicionar(@Valid @RequestBody SubmissaoDesafio submissaoDesafio){
 		
 		submissaoDesafioRepository.save(submissaoDesafio);
 		return ResponseEntity.status(HttpStatus.CREATED).body(submissaoDesafio);
@@ -58,6 +62,9 @@ public class SubmissaoDesafioResource {
 	@PutMapping("/{codigo}")
 	public ResponseEntity<?> editar (@RequestBody SubmissaoDesafio submissaoDesafio,@PathVariable Long codigo){
 		Optional<SubmissaoDesafio> submissaoDesafioBuscado = submissaoDesafioRepository.findById(codigo);
+		if(submissaoDesafioBuscado.isEmpty()) {
+			throw new NoSuchElementException("No resource found with id " + codigo);
+		}
 		BeanUtils.copyProperties(submissaoDesafio, submissaoDesafioBuscado.get(),"codigo");
 		submissaoDesafioRepository.save(submissaoDesafioBuscado.get());
 		return ResponseEntity.ok(submissaoDesafioBuscado.get());

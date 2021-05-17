@@ -5,9 +5,11 @@ INSERT INTO starter (endereco,letras,linguagem,nome,telefone) VALUES ("RUA MONTE
 INSERT INTO desafio (descricao) VALUES ("CRUD Imobiliaria");
 INSERT INTO desafio (descricao) VALUES ("CRUD Shows");
 INSERT INTO desafio (descricao) VALUES ("CRUD Livros");
+INSERT INTO desafio (descricao) VALUES ("CRUD Alunos");
 INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/comd/imobiliaria",1,1);
 INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/dmer/imobiliaria",1,2);
 INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/mamg/shows",2,3);
-INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (9,8,1);
-INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (8,7,2);
-INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (6,6,3);
+INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VALUES ("gitlab.gft.com/joca/shows",2,4);
+INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (3,3,1);
+INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (2,2,2);
+INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (1,1,3);
