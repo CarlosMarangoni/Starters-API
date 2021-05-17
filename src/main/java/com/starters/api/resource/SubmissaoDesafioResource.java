@@ -60,7 +60,7 @@ public class SubmissaoDesafioResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<?> editar (@RequestBody SubmissaoDesafio submissaoDesafio,@PathVariable Long codigo){
+	public ResponseEntity<?> editar (@Valid @RequestBody SubmissaoDesafio submissaoDesafio,@PathVariable Long codigo){
 		Optional<SubmissaoDesafio> submissaoDesafioBuscado = submissaoDesafioRepository.findById(codigo);
 		if(submissaoDesafioBuscado.isEmpty()) {
 			throw new NoSuchElementException("No resource found with id " + codigo);

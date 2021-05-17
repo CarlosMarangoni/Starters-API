@@ -60,7 +60,7 @@ public class StarterResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<?> editar (@RequestBody Starter starter,@PathVariable Long codigo){
+	public ResponseEntity<?> editar (@Valid @RequestBody Starter starter,@PathVariable Long codigo){
 		Optional<Starter> starterBuscado = starterRepository.findById(codigo);
 		if(starterBuscado.isEmpty()) {
 			throw new NoSuchElementException("No resource found with id " + codigo);
