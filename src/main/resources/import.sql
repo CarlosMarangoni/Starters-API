@@ -13,3 +13,9 @@ INSERT INTO submissao_desafio (end_repositorio,desafio_codigo,starter_codigo) VA
 INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (3,3,1);
 INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (2,2,2);
 INSERT INTO nota_desafio (nota_qualidade_do_codigo,nota_quantidade_entregada,submissao_desafio_codigo) VALUES (1,1,3);
+INSERT INTO perfil (descricao) VALUES ('INSTRUTOR');
+INSERT INTO perfil (descricao) VALUES ('STARTER');
+INSERT INTO usuario (nome,senha,username) VALUES ('David','$2a$10$SebJ8dPJIOnul133qjEhoOfJbu/Lr4u7g.1A1LTRfa8BNGC89U23q','instrutor');
+INSERT INTO usuario (nome,senha,username) VALUES ('Carlos','$2a$10$PV5oXyxk7C1jNNS0RB079u7FxFzGcibh1ZSP6G16evCM0AxLFOrGe','starter');
+INSERT INTO usuario_perfis (usuario_id,perfis_id) VALUES (1,1);
+INSERT INTO usuario_perfis (usuario_id,perfis_id) VALUES (2,2);
