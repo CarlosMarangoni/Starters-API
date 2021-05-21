@@ -1,6 +1,5 @@
 package com.starters.api.resource;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -8,7 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.starters.api.model.SubmissaoDesafio;
 import com.starters.api.repository.SubmissaoDesafioRepository;
+import com.starters.api.service.SubmissaoDesafioService;
 
 @RestController
 @RequestMapping("/submissoes")
@@ -30,24 +33,24 @@ public class SubmissaoDesafioResource {
 
 	@Autowired
 	private SubmissaoDesafioRepository submissaoDesafioRepository;
+	@Autowired
+	private SubmissaoDesafioService submissaoDesafioService;
 
 	@GetMapping
-	public List<SubmissaoDesafio> listar() {
-		return submissaoDesafioRepository.findAll();
+	public Page<SubmissaoDesafio> listar(@PageableDefault(sort = "codigo",direction = Direction.ASC) Pageable paginacao) {
+		return submissaoDesafioRepository.findAll(paginacao);
 	}
 
 	@PostMapping
-	public ResponseEntity<SubmissaoDesafio> adicionar(@Valid @RequestBody SubmissaoDesafio submissaoDesafio){
-		
-		submissaoDesafioRepository.save(submissaoDesafio);
-		return ResponseEntity.status(HttpStatus.CREATED).body(submissaoDesafio);
-		
+	@ResponseStatus(HttpStatus.CREATED)
+	public SubmissaoDesafio adicionar(@Valid @RequestBody SubmissaoDesafio submissaoDesafio){		
+		return submissaoDesafioService.salvar(submissaoDesafio);		
 	}
 	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void remover(@PathVariable Long codigo) {
-		submissaoDesafioRepository.deleteById(codigo);
+		submissaoDesafioService.excluir(codigo);
 	}
 	
 	@GetMapping("/{codigo}")
@@ -66,7 +69,7 @@ public class SubmissaoDesafioResource {
 			throw new NoSuchElementException("No resource found with id " + codigo);
 		}
 		BeanUtils.copyProperties(submissaoDesafio, submissaoDesafioBuscado.get(),"codigo");
-		submissaoDesafioRepository.save(submissaoDesafioBuscado.get());
+		submissaoDesafioService.salvar(submissaoDesafioBuscado.get());
 		return ResponseEntity.ok(submissaoDesafioBuscado.get());
 	}
 
